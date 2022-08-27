@@ -1,0 +1,53 @@
+06:05:28 [INF] (CourseLibrary.Shared.Infrastructure.Security.Encryption.ISecurityProvider.) AES-256 data encryption is enabled.
+06:05:28 [INF] (Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager.) User profile is available. Using '"/home/chris/.aspnet/DataProtection-Keys"' as key repository; keys will not be encrypted at rest.
+06:05:28 [INF] (Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager.) Creating key {430c85f4-9162-4355-9cf6-01558982abb1} with creation date 2022-08-27 04:05:28Z, activation date 2022-08-27 04:05:28Z, and expiration date 2022-11-25 04:05:28Z.
+06:05:28 [WRN] (Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager.) No XML encryptor configured. Key {430c85f4-9162-4355-9cf6-01558982abb1} may be persisted to storage in unencrypted form.
+06:05:28 [INF] (Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository.) Writing data to file '"/home/chris/.aspnet/DataProtection-Keys/key-430c85f4-9162-4355-9cf6-01558982abb1.xml"'.
+06:05:28 [INF] (Microsoft.Hosting.Lifetime.) Now listening on: "https://localhost:7049"
+06:05:28 [INF] (Microsoft.Hosting.Lifetime.) Now listening on: "http://localhost:5000"
+06:05:28 [INF] (Microsoft.Hosting.Lifetime.) Application started. Press Ctrl+C to shut down.
+06:05:28 [INF] (Microsoft.Hosting.Lifetime.) Hosting environment: "development"
+06:05:28 [INF] (Microsoft.Hosting.Lifetime.) Content root path: "/home/chris/Projects/Course-Library-MM/src/Bootstrapper/CourseLibrary.Bootstrapper/"
+06:06:22 [INF] (Microsoft.AspNetCore.Hosting.Diagnostics.GET) Request starting HTTP/2 GET https://localhost:7049/modules - -
+06:06:22 [INF] (CourseLibrary.Shared.Abstractions.Contexts.IContext.) Started processing a request [Request ID: 'faeb6e2d-edd5-46e7-81b2-7dced1d733ef', Correlation ID: 'c8e6d83b-6d94-4082-b716-72afa89bab4e', Trace ID: '"0HMK7S5STRMCF:00000003"', User ID: '""']...
+06:06:22 [INF] (Microsoft.AspNetCore.Routing.EndpointMiddleware.) Executing endpoint '"HTTP: GET /modules"'
+06:06:22 [INF] (Microsoft.AspNetCore.Routing.EndpointMiddleware.) Executed endpoint '"HTTP: GET /modules"'
+06:06:22 [INF] (CourseLibrary.Shared.Abstractions.Contexts.IContext.) Finished processing a request with status code: 200 [Request ID: 'faeb6e2d-edd5-46e7-81b2-7dced1d733ef', Correlation ID: 'c8e6d83b-6d94-4082-b716-72afa89bab4e', Trace ID: '"0HMK7S5STRMCF:00000003"', User ID: '""']
+06:06:22 [INF] (Microsoft.AspNetCore.Hosting.Diagnostics.GET) Request finished HTTP/2 GET https://localhost:7049/modules - - - 200 - application/json;+charset=utf-8 7.1688ms
+06:06:31 [INF] (Microsoft.AspNetCore.Hosting.Diagnostics.GET) Request starting HTTP/2 GET https://localhost:7049/users - -
+06:06:31 [INF] (CourseLibrary.Shared.Abstractions.Contexts.IContext.) Started processing a request [Request ID: 'acb2e7d3-62cb-4c20-9a1e-0978093a41e6', Correlation ID: 'a4e89078-713e-4c5c-9a3c-684554a8b79e', Trace ID: '"0HMK7S5STRMCF:00000005"', User ID: '""']...
+06:06:31 [INF] (Microsoft.AspNetCore.Routing.EndpointMiddleware.) Executing endpoint '"HTTP: GET /users"'
+06:06:31 [INF] (Microsoft.AspNetCore.Routing.EndpointMiddleware.) Executed endpoint '"HTTP: GET /users"'
+06:06:31 [INF] (CourseLibrary.Shared.Abstractions.Contexts.IContext.) Finished processing a request with status code: 200 [Request ID: 'acb2e7d3-62cb-4c20-9a1e-0978093a41e6', Correlation ID: 'a4e89078-713e-4c5c-9a3c-684554a8b79e', Trace ID: '"0HMK7S5STRMCF:00000005"', User ID: '""']
+06:06:31 [INF] (Microsoft.AspNetCore.Hosting.Diagnostics.GET) Request finished HTTP/2 GET https://localhost:7049/users - - - 200 - text/plain;+charset=utf-8 2.0876ms
+06:06:36 [INF] (Microsoft.AspNetCore.Hosting.Diagnostics.GET) Request starting HTTP/2 GET https://localhost:7049/notifications - -
+06:06:36 [INF] (CourseLibrary.Shared.Abstractions.Contexts.IContext.) Started processing a request [Request ID: '053707e5-cf77-4d71-8d0a-ca91e68a1fdd', Correlation ID: '0cce3f9c-7889-42c4-9728-ae60e6bf0cd0', Trace ID: '"0HMK7S5STRMCF:00000007"', User ID: '""']...
+06:06:36 [INF] (Microsoft.AspNetCore.Routing.EndpointMiddleware.) Executing endpoint '"HTTP: GET /notifications"'
+06:06:36 [INF] (Microsoft.AspNetCore.Routing.EndpointMiddleware.) Executed endpoint '"HTTP: GET /notifications"'
+06:06:36 [INF] (CourseLibrary.Shared.Abstractions.Contexts.IContext.) Finished processing a request with status code: 200 [Request ID: '053707e5-cf77-4d71-8d0a-ca91e68a1fdd', Correlation ID: '0cce3f9c-7889-42c4-9728-ae60e6bf0cd0', Trace ID: '"0HMK7S5STRMCF:00000007"', User ID: '""']
+06:06:36 [INF] (Microsoft.AspNetCore.Hosting.Diagnostics.GET) Request finished HTTP/2 GET https://localhost:7049/notifications - - - 200 - text/plain;+charset=utf-8 1.1441ms
+06:06:44 [INF] (Microsoft.AspNetCore.Hosting.Diagnostics.GET) Request starting HTTP/2 GET https://localhost:7049/courses - -
+06:06:44 [INF] (CourseLibrary.Shared.Abstractions.Contexts.IContext.) Started processing a request [Request ID: 'b54ad780-4411-445f-9fb8-0e26aae248c0', Correlation ID: 'db693f06-77c9-40ec-a334-4bb1e65102eb', Trace ID: '"0HMK7S5STRMCF:00000009"', User ID: '""']...
+06:06:44 [INF] (Microsoft.AspNetCore.Routing.EndpointMiddleware.) Executing endpoint '"HTTP: GET /courses"'
+06:06:44 [INF] (Microsoft.AspNetCore.Routing.EndpointMiddleware.) Executed endpoint '"HTTP: GET /courses"'
+06:06:44 [INF] (CourseLibrary.Shared.Abstractions.Contexts.IContext.) Finished processing a request with status code: 200 [Request ID: 'b54ad780-4411-445f-9fb8-0e26aae248c0', Correlation ID: 'db693f06-77c9-40ec-a334-4bb1e65102eb', Trace ID: '"0HMK7S5STRMCF:00000009"', User ID: '""']
+06:06:44 [INF] (Microsoft.AspNetCore.Hosting.Diagnostics.GET) Request finished HTTP/2 GET https://localhost:7049/courses - - - 200 - text/plain;+charset=utf-8 1.0773ms
+06:07:10 [INF] (Microsoft.AspNetCore.Hosting.Diagnostics.GET) Request starting HTTP/2 GET https://localhost:7049/courses - -
+06:07:10 [INF] (CourseLibrary.Shared.Abstractions.Contexts.IContext.) Started processing a request [Request ID: '4c955c59-6dd8-4cf8-bbad-18b0ba95ae09', Correlation ID: '435c72ce-1dd4-4571-9c58-7a322179de76', Trace ID: '"0HMK7S5STRMCF:0000000D"', User ID: '""']...
+06:07:10 [INF] (Microsoft.AspNetCore.Routing.EndpointMiddleware.) Executing endpoint '"HTTP: GET /courses"'
+06:07:10 [INF] (Microsoft.AspNetCore.Routing.EndpointMiddleware.) Executed endpoint '"HTTP: GET /courses"'
+06:07:10 [INF] (CourseLibrary.Shared.Abstractions.Contexts.IContext.) Finished processing a request with status code: 200 [Request ID: '4c955c59-6dd8-4cf8-bbad-18b0ba95ae09', Correlation ID: '435c72ce-1dd4-4571-9c58-7a322179de76', Trace ID: '"0HMK7S5STRMCF:0000000D"', User ID: '""']
+06:07:10 [INF] (Microsoft.AspNetCore.Hosting.Diagnostics.GET) Request finished HTTP/2 GET https://localhost:7049/courses - - - 200 - text/plain;+charset=utf-8 1.0047ms
+06:07:11 [INF] (Microsoft.AspNetCore.Hosting.Diagnostics.GET) Request starting HTTP/2 GET https://localhost:7049/notifications - -
+06:07:11 [INF] (CourseLibrary.Shared.Abstractions.Contexts.IContext.) Started processing a request [Request ID: '475aca63-c6b6-4b07-a445-6e59479e9523', Correlation ID: '0e8678df-bb74-4e27-a159-14177a52c411', Trace ID: '"0HMK7S5STRMCF:0000000F"', User ID: '""']...
+06:07:11 [INF] (Microsoft.AspNetCore.Routing.EndpointMiddleware.) Executing endpoint '"HTTP: GET /notifications"'
+06:07:11 [INF] (Microsoft.AspNetCore.Routing.EndpointMiddleware.) Executed endpoint '"HTTP: GET /notifications"'
+06:07:11 [INF] (CourseLibrary.Shared.Abstractions.Contexts.IContext.) Finished processing a request with status code: 200 [Request ID: '475aca63-c6b6-4b07-a445-6e59479e9523', Correlation ID: '0e8678df-bb74-4e27-a159-14177a52c411', Trace ID: '"0HMK7S5STRMCF:0000000F"', User ID: '""']
+06:07:11 [INF] (Microsoft.AspNetCore.Hosting.Diagnostics.GET) Request finished HTTP/2 GET https://localhost:7049/notifications - - - 200 - text/plain;+charset=utf-8 0.9968ms
+06:07:12 [INF] (Microsoft.AspNetCore.Hosting.Diagnostics.GET) Request starting HTTP/2 GET https://localhost:7049/users - -
+06:07:12 [INF] (CourseLibrary.Shared.Abstractions.Contexts.IContext.) Started processing a request [Request ID: 'e8c35df8-0b00-4dc1-82d7-86cac8960a2f', Correlation ID: 'dcc9b20f-d1d0-49a3-8994-3ed1496eb406', Trace ID: '"0HMK7S5STRMCF:00000011"', User ID: '""']...
+06:07:12 [INF] (Microsoft.AspNetCore.Routing.EndpointMiddleware.) Executing endpoint '"HTTP: GET /users"'
+06:07:12 [INF] (Microsoft.AspNetCore.Routing.EndpointMiddleware.) Executed endpoint '"HTTP: GET /users"'
+06:07:12 [INF] (CourseLibrary.Shared.Abstractions.Contexts.IContext.) Finished processing a request with status code: 200 [Request ID: 'e8c35df8-0b00-4dc1-82d7-86cac8960a2f', Correlation ID: 'dcc9b20f-d1d0-49a3-8994-3ed1496eb406', Trace ID: '"0HMK7S5STRMCF:00000011"', User ID: '""']
+06:07:12 [INF] (Microsoft.AspNetCore.Hosting.Diagnostics.GET) Request finished HTTP/2 GET https://localhost:7049/users - - - 200 - text/plain;+charset=utf-8 0.9777ms
+06:17:56 [INF] (Microsoft.Hosting.Lifetime.) Application is shutting down...
