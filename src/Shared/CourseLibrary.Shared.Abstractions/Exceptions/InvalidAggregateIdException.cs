@@ -1,6 +1,6 @@
 ﻿namespace CourseLibrary.Shared.Abstractions.Exceptions;
 
-public class InvalidAggregateIdException : CustomException
+public class InvalidAggregateIdException : CourseLibraryException
 {
     public Guid Id { get; }
 

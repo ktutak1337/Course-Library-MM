@@ -15,6 +15,7 @@ using CourseLibrary.Shared.Infrastructure.Kernel;
 using CourseLibrary.Shared.Infrastructure.Logging;
 using CourseLibrary.Shared.Infrastructure.Messaging;
 using CourseLibrary.Shared.Infrastructure.Modules;
+using CourseLibrary.Shared.Infrastructure.Mongo;
 using CourseLibrary.Shared.Infrastructure.Queries;
 using CourseLibrary.Shared.Infrastructure.Security;
 using CourseLibrary.Shared.Infrastructure.Serialization;
@@ -91,6 +92,7 @@ public static class Extensions
         services.AddDomainEvents(assemblies);
         services.AddMessaging(configuration);
         services.AddSecurity(configuration);
+        services.AddMongo(configuration);
         //services.AddOutbox(configuration);
         services.AddSingleton<IClock, UtcClock>();
         services.AddSingleton<IDispatcher, InMemoryDispatcher>();

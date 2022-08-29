@@ -12,7 +12,7 @@ public class ExceptionToResponseMapper : IExceptionToResponseMapper
     public ExceptionResponse Map(Exception exception)
         => exception switch
         {
-            CustomException ex => new ExceptionResponse(new ErrorsResponse(new Error(GetErrorCode(ex), ex.Message))
+            CourseLibraryException ex => new ExceptionResponse(new ErrorsResponse(new Error(GetErrorCode(ex), ex.Message))
                 , HttpStatusCode.BadRequest),
             _ => new ExceptionResponse(new ErrorsResponse(new Error("error", "There was an error.")),
                 HttpStatusCode.InternalServerError)

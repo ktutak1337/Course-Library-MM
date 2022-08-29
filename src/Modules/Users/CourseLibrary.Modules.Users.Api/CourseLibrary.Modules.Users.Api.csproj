@@ -7,16 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Shared\CourseLibrary.Shared.Infrastructure\CourseLibrary.Shared.Infrastructure.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Include="module.users.development.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="module.users.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\CourseLibrary.Modules.Users.Core\CourseLibrary.Modules.Users.Core.csproj" />
   </ItemGroup>
 
 </Project>
