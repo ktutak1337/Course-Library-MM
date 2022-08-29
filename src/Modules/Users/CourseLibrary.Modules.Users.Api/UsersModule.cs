@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using CourseLibrary.Shared.Abstractions.Modules;
+using CourseLibrary.Modules.Users.Core;
 
 namespace CourseLibrary.Modules.Users.Api;
 
@@ -20,11 +19,12 @@ internal sealed class UsersModule : IModule
 
     public void Register(IServiceCollection services, IConfiguration configuration)
     {
-
+        services.AddCore(configuration);
     }
 
     public void Use(IApplicationBuilder app)
     {
+        app.UseCore();
     }
 
     public void Expose(IEndpointRouteBuilder endpoints)

@@ -10,7 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace CourseLibrary.Modules.Users.Core;
 
-internal static class Extensions
+public static class Extensions
 {
     private const string Schema = "users-module";
 
@@ -24,7 +24,7 @@ internal static class Extensions
             .AddMongoRepository<RoleDocument, Guid>($"{Schema}.roles");
     }
 
-    internal static IApplicationBuilder UseCore(this IApplicationBuilder app)
+    public static IApplicationBuilder UseCore(this IApplicationBuilder app)
     {
         app.UseMongo();
 
