@@ -1,75 +1,72 @@
-﻿namespace CourseLibrary.Shared.Infrastructure.Messaging.Brokers;
+﻿using Humanizer;
+using Microsoft.Extensions.Logging;
+using CourseLibrary.Shared.Abstractions.Contexts;
+using CourseLibrary.Shared.Abstractions.Messaging;
+using CourseLibrary.Shared.Abstractions.Modules;
+using CourseLibrary.Shared.Infrastructure.Messaging.Dispatchers;
+using CourseLibrary.Shared.Infrastructure.Messaging.Outbox;
 
-//public sealed class InMemoryMessageBroker : IMessageBroker
-//{
-//    private readonly IModuleClient _moduleClient;
-//    private readonly IAsyncMessageDispatcher _asyncMessageDispatcher;
-//    private readonly IContext _context;
-//    private readonly IOutboxBroker _outboxBroker;
-//    private readonly IMessageContextRegistry _messageContextRegistry;
-//    private readonly ILogger<InMemoryMessageBroker> _logger;
-//    private readonly bool _useAsyncDispatcher;
+namespace CourseLibrary.Shared.Infrastructure.Messaging.Brokers;
 
-//    public InMemoryMessageBroker(IModuleClient moduleClient, IAsyncMessageDispatcher asyncMessageDispatcher,
-//        IContext context, IOutboxBroker outboxBroker, IMessageContextRegistry messageContextRegistry,
-//        IOptions<MessagingOptions> messagingOptions, ILogger<InMemoryMessageBroker> logger)
-//    {
-//        _moduleClient = moduleClient;
-//        _asyncMessageDispatcher = asyncMessageDispatcher;
-//        _context = context;
-//        _outboxBroker = outboxBroker;
-//        _messageContextRegistry = messageContextRegistry;
-//        _useAsyncDispatcher = messagingOptions.Value.UseAsyncDispatcher;
-//        _logger = logger;
-//    }
+internal class InMemoryMessageBroker : IMessageBroker
+{
+    private readonly IModuleClient _moduleClient;
+    private readonly IAsyncMessageDispatcher _asyncMessageDispatcher;
+    private readonly IContext _context;
+    private readonly IOutbox _outbox;
+    private readonly MessagingOptions _messagingOptions;
+    private readonly ILogger<InMemoryMessageBroker> _logger;
 
-//    public Task PublishAsync(IMessage message, CancellationToken cancellationToken = default)
-//        => PublishAsync(cancellationToken, message);
+    public InMemoryMessageBroker(IModuleClient moduleClient, IAsyncMessageDispatcher asyncMessageDispatcher,
+        IContext context, IOutbox outbox, MessagingOptions messagingOptions, ILogger<InMemoryMessageBroker> logger)
+    {
+        _moduleClient = moduleClient;
+        _asyncMessageDispatcher = asyncMessageDispatcher;
+        _context = context;
+        _outbox = outbox;
+        _messagingOptions = messagingOptions;
+        _logger = logger;
+    }
 
-//    public Task PublishAsync(IMessage[] messages, CancellationToken cancellationToken = default)
-//        => PublishAsync(cancellationToken, messages);
+    public async Task PublishAsync(params IMessage[] messages)
+    {
+        if (messages is null)
+        {
+            return;
+        }
 
-//    private async Task PublishAsync(CancellationToken cancellationToken, params IMessage[] messages)
-//    {
-//        if (messages is null)
-//        {
-//            return;
-//        }
+        messages = messages.Where(x => x is {}).ToArray();
+        if (!messages.Any())
+        {
+            return;
+        }
 
-//        messages = messages.Where(x => x is not null).ToArray();
+        foreach (var message in messages)
+        {
+            if (message.CorrelationId == Guid.Empty)
+            {
+                message.CorrelationId = _context.CorrelationId;
+            }
+        }
 
-//        if (!messages.Any())
-//        {
-//            return;
-//        }
+        if (_outbox.Enabled)
+        {
+            _logger.LogInformation("Messages will be saved to the outbox...");
+            await _outbox.SaveAsync(messages);
+            return;
+        }
 
-//        foreach (var message in messages)
-//        {
-//            var messageContext = new MessageContext(Guid.NewGuid(), _context);
-//            _messageContextRegistry.Set(message, messageContext);
+        foreach (var message in messages)
+        {
+            var name = message.GetType().Name.Underscore();
+            _logger.LogInformation($"Publishing a message: '{name}' with ID: '{message.Id:N}'...");
+            if (_messagingOptions.UseAsyncDispatcher)
+            {
+                await _asyncMessageDispatcher.PublishAsync(message);
+                continue;
+            }
 
-//            var module = message.GetModuleName();
-//            var name = message.GetType().Name.Underscore();
-//            var requestId = _context.RequestId;
-//            var traceId = _context.TraceId;
-//            var userId = _context.Identity?.Id;
-//            var messageId = messageContext.MessageId;
-//            var correlationId = messageContext.Context.CorrelationId;
-
-//            _logger.LogInformation("Publishing a message: {Name} ({Module}) [Request ID: {RequestId}, Message ID: {MessageId}, Correlation ID: {CorrelationId}, Trace ID: '{TraceId}', User ID: '{UserId}]...",
-//                name, module, requestId, messageId, correlationId, traceId, userId);
-//        }
-
-//        if (_outboxBroker.Enabled)
-//        {
-//            await _outboxBroker.SendAsync(messages);
-//            return;
-//        }
-
-//        var tasks = _useAsyncDispatcher
-//            ? messages.Select(message => _asyncMessageDispatcher.PublishAsync(message, cancellationToken))
-//            : messages.Select(message => _moduleClient.PublishAsync(message, cancellationToken));
-
-//        await Task.WhenAll(tasks);
-//    }
-//}
+            await _moduleClient.PublishAsync(message);
+        }
+    }
+}

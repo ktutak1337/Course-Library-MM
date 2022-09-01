@@ -1,3 +1,7 @@
 namespace CourseLibrary.Shared.Abstractions.Messaging;
 
-public interface IMessage { }
+public interface IMessage
+{
+    Guid Id { get; set; }
+    Guid CorrelationId { get; set; }
+}

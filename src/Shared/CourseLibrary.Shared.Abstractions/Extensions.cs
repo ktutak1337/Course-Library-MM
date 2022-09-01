@@ -7,6 +7,9 @@ public static class Extensions
     public static string RemoveWhitespace(this string value)
         => string.IsNullOrWhiteSpace(value) ? value : Regex.Replace(value, @"\s+", string.Empty);
 
+    public static long ToUnixTimeMilliseconds(this DateTime dateTime)
+            => new DateTimeOffset(dateTime).ToUnixTimeMilliseconds();
+
     public static async Task<T> NotNull<T>(this Task<T> task, Func<Exception> exception = null)
     {
         if (task is null)
