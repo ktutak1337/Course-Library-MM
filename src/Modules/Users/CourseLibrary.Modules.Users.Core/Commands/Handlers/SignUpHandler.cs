@@ -5,6 +5,7 @@ using CourseLibrary.Modules.Users.Core.Repositories;
 using CourseLibrary.Shared.Abstractions.Commands;
 using CourseLibrary.Shared.Abstractions.Messaging;
 using CourseLibrary.Shared.Abstractions.Time;
+using CourseLibrary.Shared.Infrastructure;
 using CourseLibrary.Shared.Infrastructure.Security;
 using Microsoft.Extensions.Logging;
 using System.ComponentModel.DataAnnotations;
@@ -38,12 +39,12 @@ internal sealed class SignUpHandler : ICommandHandler<SignUp>
 
     public async Task HandleAsync(SignUp command, CancellationToken cancellationToken = default)
     {
-        if (string.IsNullOrWhiteSpace(command.Email) || !EmailAddressAttribute.IsValid(command.Email))
+        if (command.Email.IsEmpty() || !EmailAddressAttribute.IsValid(command.Email))
         {
             throw new InvalidEmailException(command.Email);
         }
 
-        if (string.IsNullOrWhiteSpace(command.Password))
+        if (command.Password.IsEmpty())
         {
             throw new MissingPasswordException();
         }
@@ -55,7 +56,7 @@ internal sealed class SignUpHandler : ICommandHandler<SignUp>
             throw new EmailInUseException();
         }
 
-        var roleName = string.IsNullOrWhiteSpace(command.Role) ? DefaultRole : command.Role.ToLowerInvariant();
+        var roleName = command.Role.IsEmpty() ? DefaultRole : command.Role.ToLowerInvariant();
         var role = await _roleRepository.GetAsync(roleName);
         if (role is null)
         {

@@ -36,6 +36,9 @@ public static class Extensions
 {
     private const string CorrelationIdKey = "correlation-id";
 
+    public static bool IsEmpty(this string value)
+        => string.IsNullOrWhiteSpace(value);
+
     public static IServiceCollection AddInitializer<T>(this IServiceCollection services) where T : class, IInitializer
         => services.AddTransient<IInitializer, T>();
 

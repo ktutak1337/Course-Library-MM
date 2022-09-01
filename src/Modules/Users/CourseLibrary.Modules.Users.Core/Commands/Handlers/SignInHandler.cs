@@ -4,6 +4,7 @@ using CourseLibrary.Modules.Users.Core.Repositories;
 using CourseLibrary.Modules.Users.Core.Services;
 using CourseLibrary.Shared.Abstractions.Commands;
 using CourseLibrary.Shared.Abstractions.Messaging;
+using CourseLibrary.Shared.Infrastructure;
 using CourseLibrary.Shared.Infrastructure.Auth.JWT;
 using CourseLibrary.Shared.Infrastructure.Security;
 using Microsoft.Extensions.Logging;
@@ -35,12 +36,12 @@ internal sealed class SignInHandler : ICommandHandler<SignIn>
 
     public async Task HandleAsync(SignIn command, CancellationToken cancellationToken = default)
     {
-        if (string.IsNullOrWhiteSpace(command.Email) || !EmailAddressAttribute.IsValid(command.Email))
+        if (command.Email.IsEmpty() || !EmailAddressAttribute.IsValid(command.Email))
         {
             throw new InvalidEmailException(command.Email);
         }
 
-        if (string.IsNullOrWhiteSpace(command.Password))
+        if (command.Password.IsEmpty())
         {
             throw new MissingPasswordException();
         }
