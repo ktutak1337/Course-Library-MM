@@ -1,28 +1,47 @@
-using CourseLibrary.Modules.Courses.Api;
-using CourseLibrary.Modules.Notifications.Api;
-using CourseLibrary.Modules.Users.Api;
+using CourseLibrary.Shared.Abstractions;
+using CourseLibrary.Shared.Infrastructure;
+using CourseLibrary.Shared.Infrastructure.Logging;
+using CourseLibrary.Shared.Infrastructure.Modules;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+//builder.Services.AddEndpointsApiExplorer();
+
+builder.Host.ConfigureModules().UseLogging();
+
+var assemblies = ModuleLoader.LoadAssemblies(builder.Configuration, "MySpot.Modules.");
+var modules = ModuleLoader.LoadModules(assemblies);
+
+builder.Services.AddModularInfrastructure(builder.Configuration, assemblies, modules);
+
+foreach (var module in modules)
+{
+    module.Register(builder.Services, builder.Configuration);
+}
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-
+app.UseModularInfrastructure();
 app.UseHttpsRedirection();
 
-app.UseUsersApi();
-app.UseCoursesApi();
-app.UseNotificationssApi();
+foreach (var module in modules)
+{
+    module.Use(app);
+}
 
-app.MapGet("/", () => "Course Library API!");
+app.MapGet("/", (AppInfo appInfo) => appInfo).WithTags("API").WithName("Info");
+
+app.MapGet("/ping", () => "pong").WithTags("API").WithName("Pong");
+
+app.MapGet("/modules", (ModuleInfoProvider moduleInfoProvider) => moduleInfoProvider.Modules);
+
+foreach (var module in modules)
+{
+    module.Expose(app);
+}
+
+assemblies.Clear();
+modules.Clear();
 
 app.Run();
