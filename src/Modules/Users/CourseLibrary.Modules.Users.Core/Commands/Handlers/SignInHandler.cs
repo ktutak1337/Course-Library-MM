@@ -68,9 +68,9 @@ internal sealed class SignInHandler : ICommandHandler<SignIn>
 
         var jwt = _jsonWebTokenManager.CreateToken(user.Id.ToString(), user.Email, user.Role.Name, claims: claims);
         jwt.Email = user.Email;
-        
-        await _messageBroker.PublishAsync(new SignedIn(user.Id), cancellationToken);
-        
+
+        await _messageBroker.PublishAsync(new SignedIn(user.Id));
+
         _logger.LogInformation($"User with ID: '{user.Id}' has signed in.");
         _tokenStorage.Set(jwt);
     }

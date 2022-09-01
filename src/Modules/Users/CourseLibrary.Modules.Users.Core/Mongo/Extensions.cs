@@ -1,4 +1,5 @@
-﻿using CourseLibrary.Modules.Users.Core.Mongo.Documents;
+﻿using CourseLibrary.Modules.Users.Core.Entities;
+using CourseLibrary.Modules.Users.Core.Mongo.Documents;
 using CourseLibrary.Shared.Infrastructure.Mongo;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,7 +14,7 @@ internal static class Extensions
         using var scope = builder.ApplicationServices.CreateScope();
         var users = scope.ServiceProvider.GetRequiredService<IMongoRepository<UserDocument, Guid>>().Collection;
         var userBuilder = Builders<UserDocument>.IndexKeys;
-        
+
         Task.Run(async () => await users.Indexes.CreateManyAsync(
             new[]
             {

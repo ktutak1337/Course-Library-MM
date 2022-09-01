@@ -9,14 +9,14 @@ internal class UserRepository : IUserRepository
 {
     private readonly IMongoRepository<UserDocument, Guid> _repository;
 
-    public UserRepository(IMongoRepository<UserDocument, Guid> repository) 
+    public UserRepository(IMongoRepository<UserDocument, Guid> repository)
         => _repository = repository;
 
     public async Task<User> GetAsync(Guid id)
-        => (await _repository.GetAsync(id)).ToEntity();
+        => (await _repository.GetAsync(id))?.ToEntity();
 
     public async Task<User> GetAsync(string email)
-        => (await _repository.GetAsync(user => user.Email == email)).ToEntity();
+        => (await _repository.GetAsync(user => user.Email == email))?.ToEntity();
 
     public async Task AddAsync(User user)
         => await _repository.AddAsync(new UserDocument(user));

@@ -66,9 +66,9 @@ internal sealed class SignUpHandler : ICommandHandler<SignUp>
         var password = _passwordManager.Secure(command.Password);
 
         user = new User(command.UserId, email, password, role, isActive: true, createdAt: now);
-     
+
         await _userRepository.AddAsync(user);
-        await _messageBroker.PublishAsync(new SignedUp(user.Id, email, role.Name), cancellationToken);
+        await _messageBroker.PublishAsync(new SignedUp(user.Id, email, role.Name));
         _logger.LogInformation($"User with ID: '{user.Id}' has signed up.");
     }
 }

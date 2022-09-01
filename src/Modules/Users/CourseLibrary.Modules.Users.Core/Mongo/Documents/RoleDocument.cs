@@ -14,10 +14,10 @@ namespace CourseLibrary.Modules.Users.Core.Mongo.Documents
         {
             Name = role.Name;
             Permissions = role.Permissions;
-            Users = role.Users.Select(user => new UserDocument(user));
+            Users = role.Users?.Select(user => new UserDocument(user));
         }
 
-        public Role ToEntity() => new(Name, Permissions, Users.Select(user => 
+        public Role ToEntity() => new(Name, Permissions, Users.Select(user =>
             new User(user.Id, user.Email, user.Password, user.Role, user.IsActive, user.CreatedAt)));
     }
 }
