@@ -14,6 +14,7 @@
     <ProjectReference Include="..\..\Modules\Courses\CourseLibrary.Modules.Courses.Api\CourseLibrary.Modules.Courses.Api.csproj" />
     <ProjectReference Include="..\..\Modules\Notifications\CourseLibrary.Modules.Notifications.Api\CourseLibrary.Modules.Notifications.Api.csproj" />
     <ProjectReference Include="..\..\Modules\Users\CourseLibrary.Modules.Users.Api\CourseLibrary.Modules.Users.Api.csproj" />
+    <ProjectReference Include="..\..\Modules\Students\CourseLibrary.Modules.Students.Api\CourseLibrary.Modules.Students.Api.csproj" />
     <ProjectReference Include="..\..\Shared\CourseLibrary.Shared.Infrastructure\CourseLibrary.Shared.Infrastructure.csproj" />
   </ItemGroup>
 

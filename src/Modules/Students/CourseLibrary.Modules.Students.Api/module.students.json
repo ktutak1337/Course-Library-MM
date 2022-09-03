@@ -1,0 +1,8 @@
+{
+    "students": {
+        "module": {
+            "name": "Students",
+            "enabled": true
+        }
+    }
+}
