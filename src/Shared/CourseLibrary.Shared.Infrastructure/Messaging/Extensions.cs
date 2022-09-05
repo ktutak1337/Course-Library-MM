@@ -36,12 +36,7 @@ internal static class Extensions
         var messagingOptions = messagingSection.BindOptions<MessagingOptions>();
         var inboxOptions = inboxSection.BindOptions<InboxOptions>($"{sectionName}:inbox");
         var outboxOptions = outboxSection.BindOptions<OutboxOptions>($"{sectionName}:outbox");
-
-
-
-        // var messagingOptions = services.BindOptions<MessagingOptions>(sectionName);
-        // var inboxOptions = services.GetOptions<InboxOptions>($"{sectionName}:inbox");
-        // var outboxOptions = services.GetOptions<OutboxOptions>($"{sectionName}:outbox");
+        
         services
             .AddSingleton(messagingOptions)
             .AddSingleton(inboxOptions)

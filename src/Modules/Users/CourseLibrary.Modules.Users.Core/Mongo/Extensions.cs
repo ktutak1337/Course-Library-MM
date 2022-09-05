@@ -25,6 +25,23 @@ internal static class Extensions
                         })
             }));
 
+        
+        var roles = scope.ServiceProvider.GetRequiredService<IMongoRepository<RoleDocument, Guid>>().Collection;
+        
+        var roleDocuments = new List<RoleDocument>
+        {
+            new RoleDocument(new Role("user", new List<string> { "users", "students", "courses", "notifications" } )),
+            new RoleDocument(new Role("admin", new List<string> { "users", "students", "courses", "notifications" } ))
+        };
+        
+        Task.Run(async () =>
+        {
+            if (await roles.CountDocumentsAsync(FilterDefinition<RoleDocument>.Empty) == 0)
+            {
+                await roles.InsertManyAsync(roleDocuments);
+            }
+        });
+        
         return builder;
     }
 }

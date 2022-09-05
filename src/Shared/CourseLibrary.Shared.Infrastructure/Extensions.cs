@@ -96,7 +96,6 @@ public static class Extensions
         services.AddMessaging(configuration);
         services.AddSecurity(configuration);
         services.AddMongo(configuration);
-        //services.AddOutbox(configuration);
         services.AddSingleton<IClock, UtcClock>();
         services.AddSingleton<IDispatcher, InMemoryDispatcher>();
         services.AddControllers()
