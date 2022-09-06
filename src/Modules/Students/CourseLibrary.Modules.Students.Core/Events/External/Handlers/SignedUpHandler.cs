@@ -33,7 +33,18 @@ public class SignedUpHandler : IEventHandler<SignedUp>
 
         var email = @event.Email;
 
-        var student = new Student(@event.UserId, email, fullName: email.Split("@").First(), bio: string.Empty, avatarUrl: string.Empty, _clock.CurrentDate());
+        var student = new Student
+        (
+            @event.UserId,
+            email,
+            fullName: email.Split("@").First(),
+            bio: string.Empty,
+            avatarUrl: string.Empty,
+            notes: string.Empty,
+            isActive: true,
+            _clock.CurrentDate()
+        );
+        
         await _studentRepository.AddAsync(student);
         _logger.LogInformation($"Created a new student based on user with ID: '{@event.UserId}'.");
         await _messageBroker.PublishAsync(new StudentCreated(student.Id, student.Email, student.FullName));

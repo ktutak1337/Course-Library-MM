@@ -35,6 +35,9 @@ namespace CourseLibrary.Shared.Infrastructure;
 public static class Extensions
 {
     private const string CorrelationIdKey = "correlation-id";
+    private const string RoutePrefix = "docs";
+    private const string AppName = "Course Library API";
+    private const string AppVersion = "v1";
 
     public static bool IsEmpty(this string value)
         => string.IsNullOrWhiteSpace(value);
@@ -67,14 +70,15 @@ public static class Extensions
         }
 
         services.AddCorsPolicy(configuration);
+        services.AddEndpointsApiExplorer();
         services.AddSwaggerGen(swagger =>
         {
             swagger.EnableAnnotations();
             swagger.CustomSchemaIds(x => x.FullName);
-            swagger.SwaggerDoc("v1", new OpenApiInfo
+            swagger.SwaggerDoc(AppVersion, new OpenApiInfo
             {
-                Title = "Course Library API",
-                Version = "v1"
+                Title = AppName,
+                Version = AppVersion
             });
         });
 
@@ -129,12 +133,11 @@ public static class Extensions
         app.UseCors("cors");
         app.UseCorrelationId();
         app.UseErrorHandling();
-        app.UseSwagger();
-        app.UseReDoc(reDoc =>
+        app.UseSwagger(setup => setup.RouteTemplate = RoutePrefix + "/{documentName}/swagger.json");
+        app.UseSwaggerUI(setup =>
         {
-            reDoc.RoutePrefix = "docs";
-            reDoc.SpecUrl("/swagger/v1/swagger.json");
-            reDoc.DocumentTitle = "Course Library API";
+            setup.SwaggerEndpoint($"/{RoutePrefix}/{AppVersion}/swagger.json", AppName);
+            setup.RoutePrefix = RoutePrefix;
         });
         app.UseAuthentication();
         app.UseContext();

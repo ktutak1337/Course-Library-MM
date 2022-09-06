@@ -1,7 +1,7 @@
 @url = http://localhost:5000
-@email = user1@courselibrary.io
+@email = user10@courselibrary.io
 @password = secret
-@userId = ef4d6637-0efd-4cef-b61e-164a4ea0308e
+@userId = 73a42297-6b58-4a1c-91d9-9d0e1d69c4c8
 
 ###
 GET {{url}}

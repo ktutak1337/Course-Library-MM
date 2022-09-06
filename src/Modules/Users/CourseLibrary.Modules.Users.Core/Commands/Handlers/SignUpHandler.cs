@@ -16,7 +16,6 @@ internal sealed class SignUpHandler : ICommandHandler<SignUp>
 {
     private static readonly EmailAddressAttribute EmailAddressAttribute = new();
     private static readonly string DefaultRole = Role.Default;
-    private const string DefaultJobTitle = "employee";
 
     private readonly IUserRepository _userRepository;
     private readonly IRoleRepository _roleRepository;
@@ -66,7 +65,7 @@ internal sealed class SignUpHandler : ICommandHandler<SignUp>
         var now = _clock.CurrentDate();
         var password = _passwordManager.Secure(command.Password);
 
-        user = new User(command.UserId, email, password, role, isActive: true, createdAt: now);
+        user = new User(command.UserId, email, password, role, UserState.Active, createdAt: now);
 
         await _userRepository.AddAsync(user);
         await _messageBroker.PublishAsync(new SignedUp(user.Id, email, role.Name));

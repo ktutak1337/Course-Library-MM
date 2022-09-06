@@ -9,6 +9,7 @@ using CourseLibrary.Shared.Infrastructure.Auth.JWT;
 using CourseLibrary.Shared.Infrastructure.Security;
 using Microsoft.Extensions.Logging;
 using System.ComponentModel.DataAnnotations;
+using CourseLibrary.Modules.Users.Core.Entities;
 
 namespace CourseLibrary.Modules.Users.Core.Commands.Handlers;
 
@@ -57,7 +58,7 @@ internal sealed class SignInHandler : ICommandHandler<SignIn>
             throw new InvalidCredentialsException();
         }
 
-        if (!user.IsActive)
+        if (user.State != UserState.Active)
         {
             throw new UserNotActiveException(user.Id);
         }

@@ -1,0 +1,32 @@
+@url = http://localhost:5000
+@studentId = 73a42297-6b58-4a1c-91d9-9d0e1d69c4c8
+@accessToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3M2E0MjI5Ny02YjU4LTRhMWMtOTFkOS05ZDBlMWQ2OWM0YzgiLCJ1bmlxdWVfbmFtZSI6IjczYTQyMjk3LTZiNTgtNGExYy05MWQ5LTlkMGUxZDY5YzRjOCIsImVtYWlsIjoidXNlcjEwQGNvdXJzZWxpYnJhcnkuaW8iLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJ1c2VyIiwiYXVkIjoiY291cnNlLWxpYnJhcnkiLCJwZXJtaXNzaW9ucyI6WyJ1c2VycyIsInN0dWRlbnRzIiwiY291cnNlcyIsIm5vdGlmaWNhdGlvbnMiXSwibmJmIjoxNjYyNDQwOTU4LCJleHAiOjE2NjMwNDU3NTgsImlzcyI6ImNvdXJzZS1saWJyYXJ5In0.lL_SVmmBZyaa6GmygXCTHNQJM5kJnuoJ12qGS8UqlRQ
+
+###
+GET {{url}}
+
+###
+GET {{url}}/students/{{studentId}}
+Authorization: Bearer {{accessToken}}
+
+###
+GET {{url}}/students?state
+Authorization: Bearer {{accessToken}}
+
+###
+PUT {{url}}/students/{{studentId}}/lock
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+{
+
+}
+
+###
+PUT {{url}}/students/{{studentId}}/unlock
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+{
+
+}

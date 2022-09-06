@@ -10,6 +10,8 @@ public class StudentDocument : IIdentifiable<Guid>
     public string FullName { get; set; }
     public string Bio { get; set; }
     public string AvatarUrl { get; set; }
+    public string? Notes { get; set; }
+    public bool IsActive { get; set; }
     public DateTime CreatedAt { get; set; }
 
 
@@ -20,8 +22,10 @@ public class StudentDocument : IIdentifiable<Guid>
         FullName = student.FullName;
         Bio = student.Bio;
         AvatarUrl = student.AvatarUrl;
+        Notes = student.Notes;
+        IsActive = student.IsActive;
         CreatedAt = student.CreatedAt;
     }
 
-    public Student ToEntity() => new(Id, Email, FullName, Bio, AvatarUrl, CreatedAt);
+    public Student ToEntity() => new(Id, Email, FullName, Bio, AvatarUrl, Notes, IsActive, CreatedAt);
 }

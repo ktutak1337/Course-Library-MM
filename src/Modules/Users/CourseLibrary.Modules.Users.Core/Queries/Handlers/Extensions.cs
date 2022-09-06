@@ -22,6 +22,7 @@ internal static class Extensions
             UserId = user.Id,
             Email = user.Email,
             Role = user.Role.Name,
+            State = user.State.ToString().ToLowerInvariant(),
             CreatedAt = user.CreatedAt
         };
 }
