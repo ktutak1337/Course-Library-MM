@@ -6,4 +6,13 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Shared\CourseLibrary.Shared.Abstractions\CourseLibrary.Shared.Abstractions.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Authors\Exceptions" />
+    <Folder Include="Courses" />
+  </ItemGroup>
+
 </Project>

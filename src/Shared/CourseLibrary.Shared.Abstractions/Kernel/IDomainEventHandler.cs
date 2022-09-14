@@ -1,4 +1,6 @@
-﻿namespace CourseLibrary.Shared.Abstractions.Kernel;
+﻿using CourseLibrary.Shared.Abstractions.Domain;
+
+namespace CourseLibrary.Shared.Abstractions.Kernel;
 
 public interface IDomainEventHandler<in TEvent> where TEvent : class, IDomainEvent
 {

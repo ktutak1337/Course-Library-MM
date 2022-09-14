@@ -1,5 +1,6 @@
 ﻿using CourseLibrary.Shared.Abstractions.Kernel;
 using Microsoft.Extensions.DependencyInjection;
+using IDomainEvent = CourseLibrary.Shared.Abstractions.Domain.IDomainEvent;
 
 namespace CourseLibrary.Shared.Infrastructure.Kernel;
 
